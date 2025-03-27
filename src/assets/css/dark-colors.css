@@ -1,0 +1,30 @@
+.primary-color {
+    color: #BB86FC;
+}
+.primary-variant-color {
+    color: #3700B3;
+}
+.inside-primary{
+    color: black;
+}
+.secondary-color, .secondary-variant-color {
+    color: #03DAC5;
+}
+.inside-secondary{
+    color: black;
+}
+.surface{
+    background-color: #121212;
+}
+.inside-surface{
+    color: white;
+}
+.elevation-overlay-0dp, .elevation-overlay-1dp, .elevation-overlay-2dp, .elevation-overlay-3dp, .elevation-overlay-4dp, .elevation-overlay-6dp, .elevation-overlay-8dp, .elevation-overlay-12dp, .elevation-overlay-16dp, .elevation-overlay-24dp {
+    background-color: white;
+}
+.error-color {
+    color: #CF6679
+}
+.inside-error{
+    color: black;
+}
