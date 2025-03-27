@@ -2,15 +2,37 @@
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 
+import guildLink from "./components/guild-link.vue";
+
 const greetMsg = ref("");
 const name = ref("");
 
 const navValues = ref([
-    "A",
-    "B",
-    "C",
-    "D",
-    "E"
+    {
+        guildId : "guildId1",
+        imgURL : "https://i0.wp.com/shvilist.com/wp-content/uploads/2020/10/akrabot.jpg",
+        guildName : "Akrabot1",
+    },
+    {
+        guildId : "guildId2",
+        imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagodes-sp.jpg",
+        guildName : "Akrabot2",
+    },
+    {
+        guildId : "guildId3",
+        imgURL : "https://www.insectour.com/wp-content/uploads/2016/11/%D7%97%D7%95%D7%A4%D7%A8%D7%9F-1%D7%94.jpg",
+        guildName : "Akrabot3",
+    },
+    {
+        guildId : "guildId4",
+        imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoderma-cf-tricolor.jpg",
+        guildName : "Akrabot4",
+    },
+    {
+        guildId : "guildId5",
+        imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoddidae-sp.jpg",
+        guildName : "Akrabot5",
+    }
 ])
 
 const privateChannelsValues = ref([
@@ -31,9 +53,7 @@ async function greet() {
     <div class="appAsidePanelWrapper">
         <nav class="guilds_nav" style="background-color: brown;">
             <ul>
-                <li v-for="item in navValues">
-                    <a class="list_item" href="#">{{item}}</a>
-                </li>
+                <guildLink v-for="item in navValues" :guildId="item.guildId" :imgURL="item.imgURL" :guildName="item.guildName"></guildLink>
             </ul>
         </nav>
         <div class="private_channels channel_bar"  style="background-color: green;">
