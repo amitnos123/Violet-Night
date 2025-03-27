@@ -22,16 +22,11 @@ const tooltipShow = ref(false)
   </il>
 </template>
 
-<style>
+<style scoped>
+@import '../assets/css/tooltip.css';
+
   img {
     height: 50px;
     aspect-ratio: 1 / 1;
-  }
-  .tooltiptext {
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    margin-top: 15px;
-    background-color: black;
-  }
+  };
 </style>

@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 
 import guildLink from "./components/guild-link.vue";
+import channelLink from "./components/channel-text.vue"
 
 const greetMsg = ref("");
 const name = ref("");
@@ -36,11 +37,31 @@ const navValues = ref([
 ])
 
 const privateChannelsValues = ref([
-    "PA",
-    "PB",
-    "PC",
-    "PD",
-    "PE"
+{
+        channelId : "channelId1",
+        imgURL : "https://i0.wp.com/shvilist.com/wp-content/uploads/2020/10/akrabot.jpg",
+        channelName : "Akrabot1",
+    },
+    {
+        channelId : "channelId2",
+        imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagodes-sp.jpg",
+        channelName : "Akrabot2",
+    },
+    {
+        channelId : "channelId3",
+        imgURL : "https://www.insectour.com/wp-content/uploads/2016/11/%D7%97%D7%95%D7%A4%D7%A8%D7%9F-1%D7%94.jpg",
+        channelName : "Akrabot3",
+    },
+    {
+        channelId : "channelId4",
+        imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoderma-cf-tricolor.jpg",
+        channelName : "Akrabot4",
+    },
+    {
+        channelId : "channelId5",
+        imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoddidae-sp.jpg",
+        channelName : "Akrabot5",
+    }
 ])
 
 async function greet() {
@@ -58,9 +79,7 @@ async function greet() {
         </nav>
         <div class="private_channels channel_bar"  style="background-color: green;">
             <ul>
-                <li v-for="item in privateChannelsValues">
-                    <a class="list_item" href="#">{{item}}</a>
-                </li>
+                <channelLink v-for="item in privateChannelsValues" :channelId="item.channelId" :imgURL="item.imgURL" :channelName="item.channelName"></channelLink>
             </ul>
         </div>
         <div class="subtitle_main_member_warpper">
