@@ -8,6 +8,8 @@ import channelLink from "./components/channel-text.vue"
 const greetMsg = ref("");
 const name = ref("");
 
+const darkTheme = ref(true);
+
 const navValues = ref([
     {
         guildId : "guildId1",
@@ -91,9 +93,12 @@ async function greet() {
                     <div class="chat_content" style="background-color: greenyellow;">
                         chat_content
                     </div>
+                    <div class="input-text">
+                        <textarea placeholder="Message"></textarea>
+                    </div>
                 </main>
                 <div class="member_bar" style="background-color:darkolivegreen;">
-                    member_bar
+                    <span class="primary-color">member_bar</span>
                 </div>
             </div>
         </div>
@@ -101,6 +106,10 @@ async function greet() {
 </template>
 
 <style>
+@import './assets/css/default.css';
+</style>
+
+<style scoped>
 ol, ul {
     list-style:none
 }
@@ -111,6 +120,7 @@ ol, ul {
     flex-direction: row;
     min-height: 0;
     width: 100%;
+    height: -webkit-fill-available;
 }
 
 .guilds_nav {
@@ -192,6 +202,23 @@ ol, ul {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+}
+
+.input-text {
+    border-radius: 8px;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    padding-inline: 50px;
+    margin-inline: 50px;
+    margin-bottom: 10px;
+    background-color: black;
+    height: 70px;
+}
+
+.input-text textarea {
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
 }
 
 a,abbr,acronym,address,applet,big,blockquote,body,caption,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,table,tbody,td,tfoot,th,thead,tr,tt,ul,var {

@@ -28,3 +28,91 @@
 .elevation-overlay-24dp {
     opacity: 0.16;
 }
+@property --primary-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #BB86FC;
+}
+.primary-color {
+    color: var(--primary-color);
+}
+@property --primary-variant-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #3700B3;
+}
+.primary-variant-color {
+    color: var(--primary-variant-color);
+}
+@property --inside-primary {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: black;
+}
+.inside-primary{
+    color: var(--primary-color);
+}
+@property --secondary-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #03DAC5;
+}
+.secondary-color { 
+    color: var(--secondary-color);
+}
+@property --secondary-variant-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #03DAC5;
+}
+.secondary-variant-color {
+    color: var(--secondary-variant-color);
+}
+@property --inside-secondary {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: black;
+}
+.inside-secondary{
+    color: var(--inside-secondary);
+}
+@property --surface {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: black;
+}
+.surface{
+    background-color: var(--surface);
+}
+@property --inside-surface {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: white;
+}
+.inside-surface{
+    color: var(--inside-surface);
+}
+@property --elevation-overlay {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: white;
+}
+.elevation-overlay-0dp, .elevation-overlay-1dp, .elevation-overlay-2dp, .elevation-overlay-3dp, .elevation-overlay-4dp, .elevation-overlay-6dp, .elevation-overlay-8dp, .elevation-overlay-12dp, .elevation-overlay-16dp, .elevation-overlay-24dp {
+    background-color: var(--elevation-overlay);
+}
+@property --error {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #CF6679;
+}
+.error-color {
+    color: var(--error);
+}
+@property --inside-error {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: black;
+}
+.inside-error{
+    color: var(--inside-error);
+}
