@@ -25,8 +25,16 @@ const tooltipShow = ref(false)
 <style scoped>
   @import '../assets/css/tooltip.css';
 
+  il {
+    display: flex;
+    flex: 1 1;
+    flex-direction: row;
+
+    padding-left: 10px;
+  }
+
   img {
-    height: 50px;
+    height: var(--guild_img_size);
     aspect-ratio: 1 / 1;
   }
 

@@ -1,118 +1,113 @@
+/* Variables */
+:root {
+    /* Theme Variables */
+    --elevation-overlay: 255, 255, 255;
+    --primary-color: 187, 134, 252;
+    --primary-variant-color: 55, 0, 179;
+    --inside-primary: 0, 0, 0;
+    --secondary-color: 3, 218, 197;
+    --secondary-variant-color: 3, 218, 197;
+    --inside-secondary: 0, 0, 0;
+    --surface: 0,0,0;
+    --inside-surface: 255, 255, 255;
+    --error: 207, 102, 121;
+    --inside-error: 0, 0, 0;
+    --split-line-border-color : rgba(var(--elevation-overlay), 0.3);
+
+    /* Reactive Size Variables */
+    --guilds_nav_width: 80px;
+    --private_channels: 240px;
+    --channel_bar_width: 240px;
+    --input_text_height: 70px;
+    --input_text_min_height: 70px;
+    --guild_img_size: 50px;
+}
+
+/* Generic Classes */
 .elevation-overlay-0dp {
-    opacity: 0;
+    background-color:rgba(var(--elevation-overlay), 0);
 }
 .elevation-overlay-1dp {
-    opacity: 0.05;
+    background-color:rgba(var(--elevation-overlay), 0.05);
 }
 .elevation-overlay-2dp {
-    opacity: 0.07;
+    background-color:rgba(var(--elevation-overlay), 0.07);
 }
 .elevation-overlay-3dp {
-    opacity: 0.08;
+    background-color:rgba(var(--elevation-overlay), 0.08);
 }
 .elevation-overlay-4dp {
-    opacity: 0.09;
+    background-color:rgba(var(--elevation-overlay), 0.09);
 }
 .elevation-overlay-6dp {
-    opacity: 0.11;
+    background-color:rgba(var(--elevation-overlay), 0.11);
 }
 .elevation-overlay-8dp {
-    opacity: 0.12;
+    background-color:rgba(var(--elevation-overlay), 0.12);
 }
 .elevation-overlay-12dp {
-    opacity: 0.14;
+    background-color:rgba(var(--elevation-overlay), 0.14);
 }
 .elevation-overlay-16dp {
-    opacity: 0.15;
+    background-color:rgba(var(--elevation-overlay), 0.15);
 }
 .elevation-overlay-24dp {
-    opacity: 0.16;
-}
-@property --primary-color {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #BB86FC;
+    background-color:rgba(var(--elevation-overlay), 0.16);
 }
 .primary-color {
     color: var(--primary-color);
 }
-@property --primary-variant-color {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #3700B3;
-}
 .primary-variant-color {
     color: var(--primary-variant-color);
-}
-@property --inside-primary {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: black;
 }
 .inside-primary{
     color: var(--primary-color);
 }
-@property --secondary-color {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #03DAC5;
-}
 .secondary-color { 
     color: var(--secondary-color);
-}
-@property --secondary-variant-color {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #03DAC5;
 }
 .secondary-variant-color {
     color: var(--secondary-variant-color);
 }
-@property --inside-secondary {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: black;
-}
 .inside-secondary{
     color: var(--inside-secondary);
 }
-@property --surface {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: black;
-}
 .surface{
-    background-color: var(--surface);
-}
-@property --inside-surface {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: white;
+    background-color: rgb(var(--surface));
 }
 .inside-surface{
-    color: var(--inside-surface);
-}
-@property --elevation-overlay {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: white;
-}
-.elevation-overlay-0dp, .elevation-overlay-1dp, .elevation-overlay-2dp, .elevation-overlay-3dp, .elevation-overlay-4dp, .elevation-overlay-6dp, .elevation-overlay-8dp, .elevation-overlay-12dp, .elevation-overlay-16dp, .elevation-overlay-24dp {
-    background-color: var(--elevation-overlay);
-}
-@property --error {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #CF6679;
+    color: rgb(var(--inside-surface));
 }
 .error-color {
     color: var(--error);
 }
-@property --inside-error {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: black;
-}
 .inside-error{
     color: var(--inside-error);
+}
+.split-line-border {
+    border-style: solid;
+    border-width: 0;
+    border-left-width: 1px;
+    border-color: var(--split-line-border-color);
+}
+
+/* General Tags */
+a,abbr,acronym,address,applet,big,blockquote,body,caption,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,table,tbody,td,tfoot,th,thead,tr,tt,ul,var {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline
+}
+
+a, a:hover {
+    color:white;
+    text-decoration-line: none;
+}
+
+span {
+    color:rgba(var(--inside-surface), 0.7);
 }

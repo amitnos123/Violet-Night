@@ -4,37 +4,43 @@ import { invoke } from "@tauri-apps/api/core";
 
 import guildLink from "./components/guild-link.vue";
 import channelLink from "./components/channel-text.vue"
+import inputMessage from "./components/input-message.vue";
 
 const greetMsg = ref("");
 const name = ref("");
 
-const darkTheme = ref(true);
+// const darkTheme = ref(true);
 
 const navValues = ref([
     {
         guildId : "guildId1",
         imgURL : "https://i0.wp.com/shvilist.com/wp-content/uploads/2020/10/akrabot.jpg",
         guildName : "Akrabot1",
+        newMessage : false
     },
     {
         guildId : "guildId2",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagodes-sp.jpg",
         guildName : "Akrabot2",
+        newMessage : false
     },
     {
         guildId : "guildId3",
         imgURL : "https://www.insectour.com/wp-content/uploads/2016/11/%D7%97%D7%95%D7%A4%D7%A8%D7%9F-1%D7%94.jpg",
         guildName : "Akrabot3",
+        newMessage : true
     },
     {
         guildId : "guildId4",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoderma-cf-tricolor.jpg",
         guildName : "Akrabot4",
+        newMessage : false
     },
     {
         guildId : "guildId5",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoddidae-sp.jpg",
         guildName : "Akrabot5",
+        newMessage : false
     }
 ])
 
@@ -43,26 +49,31 @@ const privateChannelsValues = ref([
         channelId : "channelId1",
         imgURL : "https://i0.wp.com/shvilist.com/wp-content/uploads/2020/10/akrabot.jpg",
         channelName : "Akrabot1",
+        newMessage : false
     },
     {
         channelId : "channelId2",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagodes-sp.jpg",
         channelName : "Akrabot2",
+        newMessage : false
     },
     {
         channelId : "channelId3",
         imgURL : "https://www.insectour.com/wp-content/uploads/2016/11/%D7%97%D7%95%D7%A4%D7%A8%D7%9F-1%D7%94.jpg",
         channelName : "Akrabot3",
+        newMessage : true
     },
     {
         channelId : "channelId4",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoderma-cf-tricolor.jpg",
         channelName : "Akrabot4",
+        newMessage : false
     },
     {
         channelId : "channelId5",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoddidae-sp.jpg",
         channelName : "Akrabot5",
+        newMessage : false
     }
 ])
 
@@ -73,13 +84,13 @@ async function greet() {
 </script>
 
 <template>
-    <div class="appAsidePanelWrapper">
-        <nav class="guilds_nav" style="background-color: brown;">
+    <div class="appAsidePanelWrapper surface">
+        <nav class="guilds_nav elevation-overlay-12dp">
             <ul>
-                <guildLink v-for="item in navValues" :guildId="item.guildId" :imgURL="item.imgURL" :guildName="item.guildName"></guildLink>
+                <guildLink v-for="item in navValues" :guildId="item.guildId" :imgURL="item.imgURL" :guildName="item.guildName" :newMessage="item.newMessage"></guildLink>
             </ul>
         </nav>
-        <div class="private_channels channel_bar"  style="background-color: green;">
+        <div class="private_channels channel_bar elevation-overlay-12dp split-line-border">
             <ul>
                 <channelLink v-for="item in privateChannelsValues" :channelId="item.channelId" :imgURL="item.imgURL" :channelName="item.channelName"></channelLink>
             </ul>
@@ -88,16 +99,14 @@ async function greet() {
             <div class="subtitle_container" style="background-color:steelblue;">
                 subtitle_container
             </div>
-            <div class="main_member_warpper" style="background-color:blueviolet;">
-                <main class="container" style="background-color: aqua;">
-                    <div class="chat_content" style="background-color: greenyellow;">
+            <div class="main_member_warpper elevation-overlay-24dp">
+                <main class="container">
+                    <div class="chat_content">
                         chat_content
                     </div>
-                    <div class="input-text">
-                        <textarea placeholder="Message"></textarea>
-                    </div>
+                    <inputMessage></inputMessage>
                 </main>
-                <div class="member_bar" style="background-color:darkolivegreen;">
+                <div class="member_bar split-line-border">
                     <span class="primary-color">member_bar</span>
                 </div>
             </div>
@@ -125,8 +134,9 @@ ol, ul {
 
 .guilds_nav {
     position: relative;
-    width: 72px;
     flex-shrink: 0;
+
+    width: var(--guilds_nav_width);
 }
 .list_item {
     position: relative;
@@ -135,13 +145,15 @@ ol, ul {
 }
 
 .private_channels {
-    width: 240px !important;
+    width: var(--private_channels) !important;
+
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -167,7 +179,7 @@ ol, ul {
 .channel_bar {
     flex-direction: column;
     min-height: 0;
-    width: 240px;
+    width: var(--channel_bar_width);
     flex: 0 0 auto;
 }
 
@@ -202,33 +214,5 @@ ol, ul {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-}
-
-.input-text {
-    border-radius: 8px;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
-    padding-inline: 50px;
-    margin-inline: 50px;
-    margin-bottom: 10px;
-    background-color: black;
-    height: 70px;
-}
-
-.input-text textarea {
-    height: -webkit-fill-available;
-    width: -webkit-fill-available;
-}
-
-a,abbr,acronym,address,applet,big,blockquote,body,caption,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,table,tbody,td,tfoot,th,thead,tr,tt,ul,var {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    font-family: inherit;
-    font-size: 100%;
-    vertical-align: baseline
 }
 </style>
