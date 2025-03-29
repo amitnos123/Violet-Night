@@ -104,7 +104,7 @@ async function greet() {
                     <div class="chat_content">
                         chat_content
                     </div>
-                    <inputMessage></inputMessage>
+                    <inputMessage @submit-message="(message) => console.log(message)"></inputMessage>
                 </main>
                 <div class="member_bar split-line-border">
                     <span class="primary-color">member_bar</span>

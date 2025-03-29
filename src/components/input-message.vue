@@ -1,27 +1,36 @@
 <script setup lang="ts">
+import { emit } from "@tauri-apps/api/event";
 import { ref } from "vue";
 
-const message = ref("")
+defineEmits(['submitMessage']);
+
+const message = ref("");
+
+function onSubmit() {
+    console.log('message')
+    emit('submitMessage', message);
+}
 
 </script>
 
 <script lang="ts">
-function onSubmit() {
-    alert(message.value)
-}
 
 let limit : int = 200;
 
-function onInputTextarea(event) {
+function onInputTextarea(event) { //Think if Watcher on ref(message) is better
     document.documentElement.style.setProperty('--input_text_height', 0);
     document.documentElement.style.setProperty('--input_text_height', Math.min(event.target.scrollHeight, limit) + 'px');
+}
+
+function onNewLine(event) {
+    message += '\n';
 }
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit">
+    <form>
         <div class="input-message elevation-overlay-6dp">
-            <textarea class="inside-surface" @keyup.enter="submit" v-model.trim.lazy="message" @input="onInputTextarea" placeholder="Message">
+            <textarea class="inside-surface"  v-model.trim="message" @keydown.enter.shift.exact="onNewLine" @keydown.prevent.enter.exact="onSubmit" @input="onInputTextarea" placeholder="Message">
             </textarea>
         </div>
     </form>
