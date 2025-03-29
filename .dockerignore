@@ -1,0 +1,6 @@
+src-tauri/src/target
+src-tauri/.gitignore
+node_modules
+.dockerignore
+.git
+.gitignore
