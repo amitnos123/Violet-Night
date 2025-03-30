@@ -1,19 +1,8 @@
-<!-- 
-The message in the server 
--->
 <script setup lang="ts">
 import { ref } from "vue";
+import { MessageObject } from "../types";
 
-interface Props {
-  messageId : string
-  channelId : string
-  userImgURL : string
-  userName : string
-  postTime : string
-  messageContent : string
-}
-
-const { messageId = '', userImgURL = '', userName = '', postTime = '', messageContent = '' } = defineProps<Props>()
+const { messageId = '', userlId = '', userImgURL = '', userName = '', postTime = '', messageContent = '' } = defineProps<MessageObject>()
 </script>
 
 <template>

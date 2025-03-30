@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-interface Props {
-  guildId : string
-  imgURL : string
-  guildName : string
-  newMessage : boolean
-}
+import { GuildObject } from "../types";
 
-const { guildId = '', imgURL = '', guildName = '', newMessage = false } = defineProps<Props>()
+const { guildId = '', imgURL = '', guildName = '', newMessage = false } = defineProps<GuildObject>()
 
 const tooltipShow = ref(false)
 </script>

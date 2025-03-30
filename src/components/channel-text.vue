@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-interface Props {
-  channelId : string
-  imgURL : string
-  channelName : string
-}
+import { ChannelObject } from "../types";
 
-const { channelId = '', imgURL = '', channelName = '' } = defineProps<Props>()
+const { channelId = '', imgURL = '', channelName = '' } = defineProps<ChannelObject>()
 
 const tooltipShow = ref(false)
 </script>

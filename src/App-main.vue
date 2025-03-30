@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import type { Ref } from 'vue'
 import { invoke } from "@tauri-apps/api/core";
+
+import type {UserObject, MessageObject, GuildObject, ChannelGuildObject, ChannelPrivateObject, ChannelGroupObject} from "./types";
 
 import guildLink from "./components/guild-link.vue";
 import channelLink from "./components/channel-text.vue"
@@ -13,7 +16,7 @@ const name = ref("");
 
 // const darkTheme = ref(true);
 
-const navValues = ref([
+const navValues : Ref<GuildObject[]> = ref([
     {
         guildId : "guildId1",
         imgURL : "https://i0.wp.com/shvilist.com/wp-content/uploads/2020/10/akrabot.jpg",
@@ -44,44 +47,49 @@ const navValues = ref([
         guildName : "Akrabot5",
         newMessage : false
     }
-])
+]);
 
-const privateChannelsValues = ref([
+const privateChannelsValues : Ref<ChannelGuildObject[]>  = ref([
 {
+        guildId : "guildId1",
         channelId : "channelId1",
         imgURL : "https://i0.wp.com/shvilist.com/wp-content/uploads/2020/10/akrabot.jpg",
         channelName : "Akrabot1",
         newMessage : false
     },
     {
+        guildId : "guildId2",
         channelId : "channelId2",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagodes-sp.jpg",
         channelName : "Akrabot2",
         newMessage : false
     },
     {
+        guildId : "guildId3",
         channelId : "channelId3",
         imgURL : "https://www.insectour.com/wp-content/uploads/2016/11/%D7%97%D7%95%D7%A4%D7%A8%D7%9F-1%D7%94.jpg",
         channelName : "Akrabot3",
         newMessage : true
     },
     {
+        guildId : "guildId4",
         channelId : "channelId4",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoderma-cf-tricolor.jpg",
         channelName : "Akrabot4",
         newMessage : false
     },
     {
+        guildId : "guildId5",
         channelId : "channelId5",
         imgURL : "https://israel-nature-site.com/wp-content/uploads/2015/06/Rhagoddidae-sp.jpg",
         channelName : "Akrabot5",
         newMessage : false
     }
-])
+]);
 
-
-const messagesChannelsValues = ref([
+const messagesChannelsValues : Ref<MessageObject[]> = ref([
     {
+        userlId : "1",
         messageId : "1",
         channelId : "1",
         userImgURL : "#",
@@ -90,6 +98,7 @@ const messagesChannelsValues = ref([
         messageContent : "Nummy can't help "
     },
     {
+        userlId : "1",
         messageId : "2",
         channelId : "2",
         userImgURL : "#",
@@ -97,20 +106,22 @@ const messagesChannelsValues = ref([
         postTime : "12:28 AM",
         messageContent : "pretty normal round here."
     }
-])
+]);
 
-const UsersValues = ref({
+const UsersValues : Ref<{[key : string] : UserObject }> = ref({
     "1" : {
+        userlId : "1",
         userImgURL : "#",
         userName : "Senia",
         userStatus : "Online"
     },
     "2" : {
+        userlId : "2",
         userImgURL : "#",
         userName : "Mipster",
         userStatus : "Online"
     }
-})
+});
 
 // async function greet() {
 //   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
@@ -144,7 +155,6 @@ const UsersValues = ref({
                     </div>
                 </div>
                 <div class="member_bar split-line-border">
-                    <span class="primary-color">member_bar</span>
                     <ul>
                         <displayMember v-for="(item, key) in UsersValues" :userlId="key" :userImgURL="item.userImgURL" :userName="item.userName" :userStatus="item.userStatus"></displayMember>
                     </ul>
