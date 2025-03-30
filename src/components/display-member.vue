@@ -2,12 +2,12 @@
 import { ref } from "vue";
 import { UserObject } from "../types";
 
-const { userlId = '', userImgURL = '', userName = '', userStatus = '' } = defineProps<UserObject>()
+const { userId = '', userImgURL = '', userName = '', userStatus = '' } = defineProps<UserObject>()
 </script>
 
 <template>
     <li>
-        {{ userlId }}
+        {{ userId }}
         {{ userImgURL }}
         {{ userName }}
         {{ userStatus }}

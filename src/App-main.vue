@@ -89,34 +89,34 @@ const privateChannelsValues : Ref<ChannelGuildObject[]>  = ref([
 
 const messagesChannelsValues : Ref<MessageObject[]> = ref([
     {
-        userlId : "1",
         messageId : "1",
+        userId : "1",
         channelId : "1",
         userImgURL : "#",
-        userName : "Senia",
-        postTime : "10:38 AM",
-        messageContent : "Nummy can't help "
+        postTime : 11111,
+        messageContent : "Nummy can't help ",
+        userName : "Senia"
     },
     {
-        userlId : "1",
+        userId : "1",
         messageId : "2",
         channelId : "2",
         userImgURL : "#",
         userName : "Sami",
-        postTime : "12:28 AM",
+        postTime : 22222,
         messageContent : "pretty normal round here."
     }
 ]);
 
 const UsersValues : Ref<{[key : string] : UserObject }> = ref({
     "1" : {
-        userlId : "1",
+        userId : "1",
         userImgURL : "#",
         userName : "Senia",
         userStatus : "Online"
     },
     "2" : {
-        userlId : "2",
+        userId : "2",
         userImgURL : "#",
         userName : "Mipster",
         userStatus : "Online"
@@ -138,7 +138,7 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
         </nav>
         <div class="private_channels channel_bar elevation-overlay-12dp split-line-border">
             <ul>
-                <channelLink v-for="item in privateChannelsValues" :channelId="item.channelId" :imgURL="item.imgURL" :channelName="item.channelName"></channelLink>
+                <channelLink v-for="item in privateChannelsValues" :channelId="item.channelId" :imgURL="item.imgURL" :channelName="item.channelName" :newMessage="item.newMessage"></channelLink>
             </ul>
         </div>
         <div class="subtitle_main_member_warpper">
@@ -148,7 +148,7 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
             <div class="main_member_warpper elevation-overlay-24dp">
                 <div class="container">
                     <main class="chat_content">
-                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :channelId="item.channelId" :userImgURL="item.userImgURL" :userName="item.userName" :postTime="item.postTime">{{ item.messageContent }}</displayMessage>
+                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :userId="item.userId" :channelId="item.channelId" :userImgURL="item.userImgURL" :userName="item.userName" :postTime="item.postTime" :messageContent="item.messageContent">{{ item.messageContent }}</displayMessage>
                     </main>
                     <div>
                         <inputMessage @submit-message="(message) => console.log(message)"></inputMessage>
@@ -156,7 +156,7 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
                 </div>
                 <div class="member_bar split-line-border">
                     <ul>
-                        <displayMember v-for="(item, key) in UsersValues" :userlId="key" :userImgURL="item.userImgURL" :userName="item.userName" :userStatus="item.userStatus"></displayMember>
+                        <displayMember v-for="item in UsersValues" :userId="item.userId" :userImgURL="item.userImgURL" :userName="item.userName" :userStatus="item.userStatus"></displayMember>
                     </ul>
                 </div>
             </div>

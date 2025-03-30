@@ -1,19 +1,19 @@
 export interface UserObject {
-    userlId : string
+    userId : string
     userImgURL : string
     userName : string
     userStatus : string
 }
 
 export interface MessageObject {
-    messageId : string
-    userlId : string
-    channelId : string
-    guildlId? : string //think if to keep ? or do a "None" value thing
-    userImgURL : string
-    postTime : int //Unix time
-    messageContent : string
-    userName : string
+    messageId : string;
+    userId : string;
+    channelId : string;
+    guildlId? : string;
+    userImgURL : string;
+    postTime : number; //Unix time
+    messageContent : string;
+    userName : string;
 }
 
 export interface GuildObject {

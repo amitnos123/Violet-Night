@@ -2,7 +2,8 @@
 import { ref } from "vue";
 import { MessageObject } from "../types";
 
-const { messageId = '', userlId = '', userImgURL = '', userName = '', postTime = '', messageContent = '' } = defineProps<MessageObject>()
+
+const { messageId = '', userId = '', channelId = '', guildlId = '', userImgURL = '', postTime = 0, messageContent = '', userName = '' } = defineProps<MessageObject>()
 </script>
 
 <template>

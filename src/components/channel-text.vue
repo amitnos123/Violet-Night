@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { ChannelObject } from "../types";
 
-const { channelId = '', imgURL = '', channelName = '' } = defineProps<ChannelObject>()
+const { channelId = '', imgURL = '', channelName = '', newMessage = false } = defineProps<ChannelObject>()
 
 const tooltipShow = ref(false)
 </script>
