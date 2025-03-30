@@ -6,6 +6,7 @@ import guildLink from "./components/guild-link.vue";
 import channelLink from "./components/channel-text.vue"
 import inputMessage from "./components/input-message.vue";
 import displayMessage from "./components/display-message.vue";
+import displayMember from "./components/display-member.vue";
 
 const greetMsg = ref("");
 const name = ref("");
@@ -84,24 +85,37 @@ const messagesChannelsValues = ref([
         messageId : "1",
         channelId : "1",
         userImgURL : "#",
-        userName : "IAmANewUser",
-        postTime : "HH:MM AA",
-        messageContent : "Message Content"
+        userName : "Senia",
+        postTime : "10:38 AM",
+        messageContent : "Nummy can't help "
     },
     {
         messageId : "2",
         channelId : "2",
         userImgURL : "#",
-        userName : "IAmANewUser2",
-        postTime : "HH:MM BB",
-        messageContent : "Message Content"
+        userName : "Sami",
+        postTime : "12:28 AM",
+        messageContent : "pretty normal round here."
     }
 ])
 
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsg.value = await invoke("greet", { name: name.value });
-}
+const UsersValues = ref({
+    "1" : {
+        userImgURL : "#",
+        userName : "Senia",
+        userStatus : "Online"
+    },
+    "2" : {
+        userImgURL : "#",
+        userName : "Mipster",
+        userStatus : "Online"
+    }
+})
+
+// async function greet() {
+//   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+//   greetMsg.value = await invoke("greet", { name: name.value });
+// }
 </script>
 
 <template>
@@ -131,6 +145,9 @@ async function greet() {
                 </div>
                 <div class="member_bar split-line-border">
                     <span class="primary-color">member_bar</span>
+                    <ul>
+                        <displayMember v-for="(item, key) in UsersValues" :userlId="key" :userImgURL="item.userImgURL" :userName="item.userName" :userStatus="item.userStatus"></displayMember>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -160,6 +177,8 @@ ol, ul {
     flex-shrink: 0;
 
     width: var(--guilds_nav_width);
+
+    overflow-y: scroll;
 }
 .list_item {
     position: relative;
@@ -180,6 +199,9 @@ ol, ul {
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+
+    overflow-y: auto;
 }
 
 .chat_content {
@@ -204,6 +226,8 @@ ol, ul {
     min-height: 0;
     width: var(--channel_bar_width);
     flex: 0 0 auto;
+
+    overflow-y: auto;
 }
 
 .subtitle_container {
@@ -216,6 +240,8 @@ ol, ul {
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    overflow-y: auto;
 }
 
 .main_member_warpper {
