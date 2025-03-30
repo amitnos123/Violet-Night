@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { ChannelObject } from "../types";
 
 const { channelId = '', imgURL = '', channelName = '', newMessage = false } = defineProps<ChannelObject>()
-
-const tooltipShow = ref(false)
 </script>
 
 <template>
@@ -19,8 +16,6 @@ const tooltipShow = ref(false)
 </template>
 
 <style scoped>
-  @import '../assets/css/tooltip.css';
-
   il {
     display: flex;
     flex: 1 1;

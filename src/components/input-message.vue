@@ -1,29 +1,28 @@
 <script setup lang="ts">
+// import { event } from "@tauri-apps/api";
 import { emit } from "@tauri-apps/api/event";
 import { ref } from "vue";
+import type { Ref } from 'vue'
 
 defineEmits(['submitMessage']);
 
-const message = ref("");
+const message : Ref<string> = ref("");
 
 function onSubmit() {
     console.log('message')
     emit('submitMessage', message);
 }
 
-</script>
 
-<script lang="ts">
+const limit : number = 200;
 
-let limit : int = 200;
-
-function onInputTextarea(event) { //Think if Watcher on ref(message) is better
-    document.documentElement.style.setProperty('--input_text_height', 0);
+function onInputTextarea(event : any) { //Think if Watcher on ref(message) is better
+    document.documentElement.style.setProperty('--input_text_height', '0');
     document.documentElement.style.setProperty('--input_text_height', Math.min(event.target.scrollHeight, limit) + 'px');
 }
 
-function onNewLine(event) {
-    message += '\n';
+function onNewLine() {
+    message.value += '\n';
 }
 </script>
 

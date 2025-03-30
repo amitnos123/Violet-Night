@@ -10,9 +10,10 @@ import channelLink from "./components/channel-text.vue"
 import inputMessage from "./components/input-message.vue";
 import displayMessage from "./components/display-message.vue";
 import displayMember from "./components/display-member.vue";
+import channelTitle from "./components/channel-title.vue";
 
-const greetMsg = ref("");
-const name = ref("");
+// const greetMsg = ref("");
+// const name = ref("");
 
 // const darkTheme = ref(true);
 
@@ -143,7 +144,7 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
         </div>
         <div class="subtitle_main_member_warpper">
             <div class="subtitle_container" style="background-color:steelblue;">
-                subtitle_container
+                <channelTitle :channelId="privateChannelsValues[0].channelId" :imgURL="privateChannelsValues[0].imgURL" :channelName="privateChannelsValues[0].channelName" :newMessage="privateChannelsValues[0].newMessage"></channelTitle>
             </div>
             <div class="main_member_warpper elevation-overlay-24dp">
                 <div class="container">
@@ -247,11 +248,8 @@ ol, ul {
 }
 
 .member_bar {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
     overflow-y: auto;
+    width: 270px;
 }
 
 .main_member_warpper {
