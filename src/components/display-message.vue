@@ -61,9 +61,11 @@ img {
 
 .postTimeWrapper {
   font-size: smaller;
+  color:rgba(var(--elevation-overlay), 0.3);
 }
 
 .contentWrapper {
+  color:rgb(var(--inside-surface));
   width: -webkit-fill-available;
 }
 </style>
