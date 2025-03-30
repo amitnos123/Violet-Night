@@ -21,6 +21,7 @@
     --input_text_height: 70px;
     --input_text_min_height: 70px;
     --guild_img_size: 50px;
+    --input_message_margin_bottom: 20px;
 }
 
 /* Generic Classes */

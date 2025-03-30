@@ -5,6 +5,7 @@ import { invoke } from "@tauri-apps/api/core";
 import guildLink from "./components/guild-link.vue";
 import channelLink from "./components/channel-text.vue"
 import inputMessage from "./components/input-message.vue";
+import displayMessage from "./components/display-message.vue";
 
 const greetMsg = ref("");
 const name = ref("");
@@ -77,6 +78,26 @@ const privateChannelsValues = ref([
     }
 ])
 
+
+const messagesChannelsValues = ref([
+    {
+        messageId : "1",
+        channelId : "1",
+        userImgURL : "#",
+        userName : "IAmANewUser",
+        postTime : "HH:MM AA",
+        messageContent : "Message Content"
+    },
+    {
+        messageId : "2",
+        channelId : "2",
+        userImgURL : "#",
+        userName : "IAmANewUser2",
+        postTime : "HH:MM BB",
+        messageContent : "Message Content"
+    }
+])
+
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
   greetMsg.value = await invoke("greet", { name: name.value });
@@ -100,12 +121,14 @@ async function greet() {
                 subtitle_container
             </div>
             <div class="main_member_warpper elevation-overlay-24dp">
-                <main class="container">
-                    <div class="chat_content">
-                        chat_content
+                <div class="container">
+                    <main class="chat_content">
+                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :channelId="item.channelId" :userImgURL="item.userImgURL" :userName="item.userName" :postTime="item.postTime">{{ item.messageContent }}</displayMessage>
+                    </main>
+                    <div>
+                        <inputMessage @submit-message="(message) => console.log(message)"></inputMessage>
                     </div>
-                    <inputMessage @submit-message="(message) => console.log(message)"></inputMessage>
-                </main>
+                </div>
                 <div class="member_bar split-line-border">
                     <span class="primary-color">member_bar</span>
                 </div>
@@ -160,20 +183,20 @@ ol, ul {
 }
 
 .chat_content {
+    display: block;
     position: relative;
-    display: flex;
-    flex-direction: column;
     min-width: 0;
     min-height: 0;
-    flex: 1 1 auto;
-    width: -webkit-fill-available;
+    flex-grow: 1;
+
+    overflow-y: auto;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
     height: 100%;
     width: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
 }
 
 .channel_bar {

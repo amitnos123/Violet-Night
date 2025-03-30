@@ -42,10 +42,12 @@ function onNewLine(event) {
 
     padding-inline: 50px;
     margin-inline: 50px;
-    margin-bottom: 10px;
+    margin-bottom: var(--input_message_margin_bottom);
     
     height: var(--input_text_height);
     min-height: var(--input_text_min_height);
+
+    align-self: flex-end;
 }
 
 textarea {
