@@ -133,6 +133,8 @@ export class CommunicationHelper {
 
      /**
       * addInfListener
+      * 
+      * return true on success, else false.
      */
     public addInfListener(listener: (arg: Message) => void) : boolean {
         const listnerKiller = this.addListener(listener);
@@ -143,10 +145,16 @@ export class CommunicationHelper {
         this.infListenerKillArray.push(listnerKiller);
         return true;
     }
+
      /**
-      * addListenerSingleUse
+      * addSingleUseListener
+      * 
+      * To turn a single user listner to a multi use, one can use recorsive function as a loop.
+      * This way can count the number of time the listener was used.
+      * 
+      * return true on success, else false.
      */
-     public addListenerSingleUse(listener: (arg: Message) => boolean) : boolean {
+     public addSingleUseListener(listener: (arg: Message) => boolean) : boolean {
         const listnerKiller = this.addListener((arg: Message) =>{
             if(listener(arg)) { // listener return true, if finished it's job and need to be killed
                 if(typeof listnerKiller !== "boolean") {
