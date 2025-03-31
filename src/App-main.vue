@@ -5,11 +5,11 @@ import { invoke } from "@tauri-apps/api/core";
 
 import type {UserObject, MessageObject, GuildObject, ChannelGuildObject, ChannelPrivateObject, ChannelGroupObject} from "./types";
 
-import guildLink from "./components/guild-link.vue";
+import guildLink from "./components/guild/guild-link.vue";
 import channelLink from "./components/channel-text.vue"
 import inputMessage from "./components/input-message.vue";
 import displayMessage from "./components/display-message.vue";
-import displayMember from "./components/display-member.vue";
+import displayMember from "./components/guild/display-member.vue";
 import channelTitle from "./components/channel-title.vue";
 
 // const greetMsg = ref("");
@@ -93,17 +93,13 @@ const messagesChannelsValues : Ref<MessageObject[]> = ref([
         messageId : "1",
         userId : "1",
         channelId : "1",
-        userImgURL : "#",
         postTime : 11111,
-        messageContent : "Nummy can't help ",
-        userName : "Senia"
+        messageContent : "Nummy can't help "
     },
     {
         userId : "1",
         messageId : "2",
         channelId : "2",
-        userImgURL : "#",
-        userName : "Sami",
         postTime : 22222,
         messageContent : "pretty normal round here."
     }
@@ -149,7 +145,7 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
             <div class="main_member_warpper elevation-overlay-24dp">
                 <div class="container">
                     <main class="chat_content">
-                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :userId="item.userId" :channelId="item.channelId" :userImgURL="item.userImgURL" :userName="item.userName" :postTime="item.postTime" :messageContent="item.messageContent">{{ item.messageContent }}</displayMessage>
+                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :userId="item.userId" :channelId="item.channelId" :userImgURL="UsersValues[item.userId].userImgURL" :userName="UsersValues[item.userId].userName" :postTime="item.postTime" :messageContent="item.messageContent">{{ item.messageContent }}</displayMessage>
                     </main>
                     <div>
                         <inputMessage @submit-message="(message) => console.log(message)"></inputMessage>

@@ -9,11 +9,13 @@ export interface MessageObject {
     messageId : string;
     userId : string;
     channelId : string;
-    guildlId? : string;
-    userImgURL : string;
     postTime : number; //Unix time
     messageContent : string;
-    userName : string;
+    
+    //optional
+    guildlId? : string;
+    userImgURL? : string;
+    userName? : string;
 }
 
 export interface GuildObject {
