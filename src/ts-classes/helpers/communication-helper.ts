@@ -2,17 +2,22 @@ import WebSocket, { Message, CloseFrame } from '@tauri-apps/plugin-websocket';
 // when using `"withGlobalTauri": true`, you may use
 // const WebSocket = window.__TAURI__.websocket;
 
-export class communicationHelper {
+export class CommunicationHelper {
     
     // The address to the server side 
     private readonly connectionAddress : string = '';
-    private isConnected : boolean = false;
+    private connected : boolean = false;
+    private hasListener : boolean = false;
 
     protected ws!: WebSocket | undefined;
     protected lastErr: unknown;
 
-    public get connected() : boolean {
-        return ((this.ws != undefined) && this.isConnected)
+    public get isConnected() : boolean {
+        return ((this.ws != undefined) && this.connected)
+    }
+    
+    public get isListening() : boolean {
+        return this.hasListener;
     }
 
 
@@ -38,12 +43,12 @@ export class communicationHelper {
             this.ws = await WebSocket.connect(this.connectionAddress).then((r) => {
                 return r;
               })
-            this.isConnected = true
+            this.connected = true
             return true;
         } catch (err : unknown) {
             this.lastErr = err;
         }
-        this.isConnected = false;
+        this.connected = false;
         return false;
     }
 
@@ -123,15 +128,25 @@ export class communicationHelper {
      * MessageKind<'Pong', number[]> |
      * MessageKind<'Close', CloseFrame | null>;
      */
-    public setListener(listener: (arg: Message) => void) : boolean {
-        try {
-            if(this.ws != undefined) {
-                this.ws.addListener(listener);
-                return true;
-            }
-        } catch (error) {
-            this.lastErr = error;
+    public addListener(listener: (arg: Message) => void) : (() => void) | boolean {
+        if(this.ws != undefined){
+            return this.ws.addListener(listener); // TODO: Save the return. ws.addListener return a function to delete the listener.
         }
         return false;
+    }
+
+    public addListenerSingleUse(listener: (arg: Message) => boolean) : boolean {
+        const listnerKiller = this.addListener((arg: Message) =>{
+            if(listener(arg)) { // listener return true, if finished it's job and need to be killed
+                if(typeof listnerKiller !== "boolean") {
+                    listnerKiller();
+                }
+            }
+        })
+        if((typeof listnerKiller === "boolean") && !listnerKiller) {
+            // if listnerKiller is false
+            return false;
+        }
+        return true;
     }
 }

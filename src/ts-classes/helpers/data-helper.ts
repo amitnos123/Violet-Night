@@ -1,7 +1,24 @@
 import { ref } from "vue";
 import type { Ref } from 'vue'
 import type {UserObject, MessageObject, GuildObject, ChannelGuildObject, ChannelPrivateObject, ChannelGroupObject} from "../../types";
-export class dataHelper {
+import { CommunicationHelper } from "./communication-helper";
+import { Message } from "@tauri-apps/plugin-websocket";
+
+enum RequestType {
+    FRIENDS,
+    CHANNEL_MESSAGES,
+    PRIVATE_CHANNELS,
+    GROUP_CHANNELS,
+    GUILD_CHANNELS,
+    GUILD_USERS,
+    USER_GUILDS,
+
+    MESSAGE_NEW,
+    MESSAGE_UPDATE,
+    MESSAGE_DELETE
+}
+
+export class DataHelper {
 
     /*
         Class handles all the data on client side.
@@ -10,6 +27,10 @@ export class dataHelper {
 
     // Client user's Id
     private userId : string = '';
+
+    private readonly ch! : CommunicationHelper;
+
+    protected readonly expectedResponseToRequest : Array<RequestType> = [];
 
     // The address to the server side 
     // private connectionAddress : string = '';
@@ -38,8 +59,47 @@ export class dataHelper {
 
     constructor(userId : string) {
         this.userId = userId;
+        this.ch = new CommunicationHelper();
     }
 
+
+    /*
+        TODO:
+        Need 24/7 listeners:
+            - Ping like for new message. (Should do listner per guild?)
+            Would get Guild, Channel, User, isClientMentioned.
+            Client will resolve, if to show or not.
+            Guild and Channel to know what to show has a new message.
+            User because client my mute\block\etc
+            isClientMentioned to know if Red Discord Ping or not
+            - Listen to current channel
+            Would get MessageObject
+            ? Maybe kill Listner when moved to listening to diffirent channel
+        Single User Listeners:
+            - Validation Listner per Request method
+            - Can create an interface \ class \ object for this?
+    */
+
+    /*
+     * 
+     * interface MessageKind<T, D> {
+     * type: T;
+     * data: D;
+     * }
+     * 
+     * interface CloseFrame {
+     * code: number;
+     * reason: string;
+     * }
+     * 
+     * type Message =
+     * 
+     * MessageKind<'Text', string> |
+     * MessageKind<'Binary', number[]> |
+     * MessageKind<'Ping', number[]> |
+     * MessageKind<'Pong', number[]> |
+     * MessageKind<'Close', CloseFrame | null>;
+     */
 
     /* Server Request Methods */
     /*------------------------*/
@@ -54,6 +114,8 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestFriends() : boolean {
+        this.expectedResponseToRequest.push(RequestType.FRIENDS);
+        // this.ch.send()
         return true;
     }
 
@@ -63,6 +125,8 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestPrivateChannels() : boolean {
+        this.expectedResponseToRequest.push(RequestType.PRIVATE_CHANNELS);
+        // this.ch.send()
         return true;
     }
 
@@ -72,6 +136,8 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestGroupChannels() : boolean {
+        this.expectedResponseToRequest.push(RequestType.GROUP_CHANNELS);
+        // this.ch.send()
         return true;
     }
 
@@ -81,6 +147,8 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestUserGuilds() : boolean {
+        this.expectedResponseToRequest.push(RequestType.USER_GUILDS);
+        // this.ch.send()
         return true;
     }
 
@@ -90,6 +158,8 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestGuildUsers() : boolean {
+        this.expectedResponseToRequest.push(RequestType.GUILD_USERS);
+        // this.ch.send()
         return true;
     }
 
@@ -99,6 +169,20 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestGuildChannels(guildId : string) : boolean {
+        this.expectedResponseToRequest.push(RequestType.GUILD_CHANNELS);
+        // this.ch.send()
+
+        //Generic example how to implement single use Listner
+        const listnerKiller = this.ch.addListener((arg: Message) =>{
+            if(typeof listnerKiller !== "boolean") {
+                listnerKiller();
+            }
+        })
+        if((typeof listnerKiller === "boolean") && !listnerKiller) {
+            // if listnerKiller is false
+            return false;
+        }
+
         return true;
     }
 
@@ -108,6 +192,8 @@ export class dataHelper {
      * Return True on success, else false
      */
     public requestChannelMessages(channelId : string) : boolean {
+        this.expectedResponseToRequest.push(RequestType.CHANNEL_MESSAGES);
+        // this.ch.send()
         return true;
     }
 
@@ -120,8 +206,10 @@ export class dataHelper {
      * 
      * Return True on success, else false
      */
-    public requestPostNewMessage(message : MessageObject) : boolean {
-        return true;
+    public requestPostNewMessage(message : MessageObject) : Promise<boolean> {
+        this.expectedResponseToRequest.push(RequestType.MESSAGE_NEW);
+        const r : Promise<boolean> = this.ch.send("PLACE-HOLDER");
+        return r;
     }
 
     /**
@@ -129,8 +217,10 @@ export class dataHelper {
      * 
      * Return True on success, else false
      */
-    public requestPostUpdateMessage(messageId : string, newMessageContent : string) {
-        
+    public requestPostUpdateMessage(messageId : string, newMessageContent : string) : Promise<boolean> {
+        this.expectedResponseToRequest.push(RequestType.MESSAGE_UPDATE);
+        const r : Promise<boolean> = this.ch.send("PLACE-HOLDER");
+        return r;
     }
 
     /**
@@ -138,8 +228,10 @@ export class dataHelper {
      * 
      * Return True on success, else false
      */
-    public requestPostDeleteMessage(messageId : string) {
-        
+    public requestPostDeleteMessage(messageId : string) : Promise<boolean> {
+        this.expectedResponseToRequest.push(RequestType.MESSAGE_DELETE);
+        const r : Promise<boolean> = this.ch.send("PLACE-HOLDER");
+        return r;
     }
 }
 
