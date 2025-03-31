@@ -88,7 +88,7 @@ export class communicationHelper {
      * MessageKind<'Pong', number[]> |
      * MessageKind<'Close', CloseFrame | null>;
      */
-    protected async send(message: Message | string | number[]) : Promise<boolean> {
+    public async send(message: Message | string | number[]) : Promise<boolean> {
         try {
             if(this.ws != undefined) {
                 await this.ws.send(message).then(() => {});
@@ -123,7 +123,7 @@ export class communicationHelper {
      * MessageKind<'Pong', number[]> |
      * MessageKind<'Close', CloseFrame | null>;
      */
-    protected setListener(listener: (arg: Message) => void) : boolean {
+    public setListener(listener: (arg: Message) => void) : boolean {
         try {
             if(this.ws != undefined) {
                 this.ws.addListener(listener);
