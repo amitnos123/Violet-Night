@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Ref } from 'vue'
-import { invoke } from "@tauri-apps/api/core";
+
+// tauri example of invoke
+// import { invoke } from "@tauri-apps/api/core";
+// const greetMsg = ref("");
+// const name = ref("");
+// async function greet() {
+//   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+//   greetMsg.value = await invoke("greet", { name: name.value });
+// }
 
 import type {UserObject, MessageObject, GuildObject, ChannelGuildObject, ChannelPrivateObject, ChannelGroupObject} from "./types";
 
@@ -11,9 +19,6 @@ import inputMessage from "./components/input-message.vue";
 import displayMessage from "./components/display-message.vue";
 import displayMember from "./components/guild/display-member.vue";
 import channelTitle from "./components/channel-title.vue";
-
-// const greetMsg = ref("");
-// const name = ref("");
 
 // const darkTheme = ref(true);
 
@@ -119,11 +124,6 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
         userStatus : "Online"
     }
 });
-
-// async function greet() {
-//   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-//   greetMsg.value = await invoke("greet", { name: name.value });
-// }
 </script>
 
 <template>

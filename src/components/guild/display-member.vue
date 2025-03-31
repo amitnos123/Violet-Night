@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { UserObject } from "../../types";
 
 const { userId = '', userImgURL = '', userName = '', userStatus = '' } = defineProps<UserObject>()
@@ -38,8 +37,5 @@ const { userId = '', userImgURL = '', userName = '', userStatus = '' } = defineP
       
       margin-top: 10px;
       margin-left: 10px;
-    }
-  
-    .user-name {
     }
   </style>
