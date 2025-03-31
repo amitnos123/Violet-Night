@@ -16,11 +16,6 @@ export class CommunicationHelper {
     public get isConnected() : boolean {
         return ((this.ws != undefined) && this.connected)
     }
-    
-    public get isListening() : boolean {
-        return this.hasListener;
-    }
-
 
     constructor() {
         this.connect().catch((error) => {
@@ -136,6 +131,9 @@ export class CommunicationHelper {
         return false;
     }
 
+     /**
+      * addInfListener
+     */
     public addInfListener(listener: (arg: Message) => void) : boolean {
         const listnerKiller = this.addListener(listener);
         if((typeof listnerKiller === "boolean")) {
@@ -145,8 +143,10 @@ export class CommunicationHelper {
         this.infListenerKillArray.push(listnerKiller);
         return true;
     }
-
-    public addListenerSingleUse(listener: (arg: Message) => boolean) : boolean {
+     /**
+      * addListenerSingleUse
+     */
+     public addListenerSingleUse(listener: (arg: Message) => boolean) : boolean {
         const listnerKiller = this.addListener((arg: Message) =>{
             if(listener(arg)) { // listener return true, if finished it's job and need to be killed
                 if(typeof listnerKiller !== "boolean") {
