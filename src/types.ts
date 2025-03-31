@@ -11,6 +11,7 @@ export interface MessageObject {
     channelId : string;
     postTime : number; //Unix time
     messageContent : string;
+    edited: boolean
     
     //optional
     guildlId? : string;

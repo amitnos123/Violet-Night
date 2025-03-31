@@ -99,14 +99,16 @@ const messagesChannelsValues : Ref<MessageObject[]> = ref([
         userId : "1",
         channelId : "1",
         postTime : 11111,
-        messageContent : "Nummy can't help "
+        messageContent : "Nummy can't help ",
+        edited: false
     },
     {
         userId : "1",
         messageId : "2",
         channelId : "2",
         postTime : 22222,
-        messageContent : "pretty normal round here."
+        messageContent : "pretty normal round here.",
+        edited: false
     }
 ]);
 
@@ -145,7 +147,7 @@ const UsersValues : Ref<{[key : string] : UserObject }> = ref({
             <div class="main_member_warpper elevation-overlay-24dp">
                 <div class="container">
                     <main class="chat_content">
-                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :userId="item.userId" :channelId="item.channelId" :userImgURL="UsersValues[item.userId].userImgURL" :userName="UsersValues[item.userId].userName" :postTime="item.postTime" :messageContent="item.messageContent">{{ item.messageContent }}</displayMessage>
+                        <displayMessage v-for="item in messagesChannelsValues" :messageId="item.messageId" :userId="item.userId" :channelId="item.channelId" :userImgURL="UsersValues[item.userId].userImgURL" :userName="UsersValues[item.userId].userName" :postTime="item.postTime" :messageContent="item.messageContent" :edited="item.edited">{{ item.messageContent }}</displayMessage>
                     </main>
                     <div>
                         <inputMessage @submit-message="(message) => console.log(message)"></inputMessage>
