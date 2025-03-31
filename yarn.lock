@@ -330,7 +330,7 @@
   dependencies:
     "@tauri-apps/api" "^2.0.0"
 
-"@tauri-apps/plugin-websocket@~2":
+"@tauri-apps/plugin-websocket@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-websocket/-/plugin-websocket-2.3.0.tgz#7b7c69db52828aee8ad0efd3cbd684f593ef7e07"
   integrity sha512-eAwRGe3tnqDeQYE0wq4g1PUKbam9tYvlC4uP/au12Y/z7MP4lrS4ylv+aoZ5Ly+hTlBdi7hDkhHomwF/UeBesA==
