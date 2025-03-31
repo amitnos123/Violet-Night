@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import type { Ref } from 'vue'
-import type {UserObject, MessageObject, GuildObject, ChannelGuildObject, ChannelPrivateObject, ChannelGroupObject} from "../types";
+import type {UserObject, MessageObject, GuildObject, ChannelGuildObject, ChannelPrivateObject, ChannelGroupObject} from "../../types";
 export class dataHelper {
 
     /*
@@ -8,7 +8,12 @@ export class dataHelper {
         It get the data and return the requested data as needed
     */
 
+    // Client user's Id
     private userId : string = '';
+
+    // The address to the server side 
+    // private connectionAddress : string = '';
+    // Will do it in Tauri side
 
     //All the guilds the User belongs
     public readonly userGuilds : Ref<{[key : string] : GuildObject }> = ref({});
