@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { UserObject } from "../types";
+import { UserObject } from "../../types";
 
 const { userId = '', userImgURL = '', userName = '', userStatus = '' } = defineProps<UserObject>()
 </script>

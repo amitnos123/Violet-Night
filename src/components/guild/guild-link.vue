@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { GuildObject } from "../types";
+import { GuildObject } from "../../types";
 
 const { guildId = '', imgURL = '', guildName = '', newMessage = false } = defineProps<GuildObject>()
 
@@ -21,7 +21,7 @@ const tooltipShow = ref(false)
 </template>
 
 <style scoped>
-@import '../assets/css/tooltip.css';
+@import '../../assets/css/tooltip.css';
 
   il {
     display: flex;
