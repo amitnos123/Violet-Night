@@ -172,17 +172,6 @@ export class DataHelper {
         this.expectedResponseToRequest.push(RequestType.GUILD_CHANNELS);
         // this.ch.send()
 
-        //Generic example how to implement single use Listner
-        const listnerKiller = this.ch.addListener((arg: Message) =>{
-            if(typeof listnerKiller !== "boolean") {
-                listnerKiller();
-            }
-        })
-        if((typeof listnerKiller === "boolean") && !listnerKiller) {
-            // if listnerKiller is false
-            return false;
-        }
-
         return true;
     }
 

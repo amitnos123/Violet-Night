@@ -7,7 +7,8 @@ export class CommunicationHelper {
     // The address to the server side 
     private readonly connectionAddress : string = '';
     private connected : boolean = false;
-    private hasListener : boolean = false;
+    private readonly infListenerKillArray : Array<() => void> = [];
+
 
     protected ws!: WebSocket | undefined;
     protected lastErr: unknown;
@@ -128,11 +129,21 @@ export class CommunicationHelper {
      * MessageKind<'Pong', number[]> |
      * MessageKind<'Close', CloseFrame | null>;
      */
-    public addListener(listener: (arg: Message) => void) : (() => void) | boolean {
+    private addListener(listener: (arg: Message) => void) : (() => void) | boolean {
         if(this.ws != undefined){
             return this.ws.addListener(listener); // TODO: Save the return. ws.addListener return a function to delete the listener.
         }
         return false;
+    }
+
+    public addInfListener(listener: (arg: Message) => void) : boolean {
+        const listnerKiller = this.addListener(listener);
+        if((typeof listnerKiller === "boolean")) {
+            // if listnerKiller is false. listnerKiller can't be true.
+            return false;
+        }
+        this.infListenerKillArray.push(listnerKiller);
+        return true;
     }
 
     public addListenerSingleUse(listener: (arg: Message) => boolean) : boolean {
