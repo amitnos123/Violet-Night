@@ -195,10 +195,9 @@ export class DataHelper {
      * 
      * Return True on success, else false
      */
-    public requestPostNewMessage(message : MessageObject) : Promise<boolean> {
+    public requestPostNewMessage(message : MessageObject) : boolean {
         this.expectedResponseToRequest.push(RequestType.MESSAGE_NEW);
-        const r : Promise<boolean> = this.ch.send("PLACE-HOLDER");
-        return r;
+        return true;
     }
 
     /**
@@ -206,10 +205,9 @@ export class DataHelper {
      * 
      * Return True on success, else false
      */
-    public requestPostUpdateMessage(messageId : string, newMessageContent : string) : Promise<boolean> {
+    public requestPostUpdateMessage(messageId : string, newMessageContent : string) : boolean {
         this.expectedResponseToRequest.push(RequestType.MESSAGE_UPDATE);
-        const r : Promise<boolean> = this.ch.send("PLACE-HOLDER");
-        return r;
+        return true;
     }
 
     /**
@@ -217,10 +215,9 @@ export class DataHelper {
      * 
      * Return True on success, else false
      */
-    public requestPostDeleteMessage(messageId : string) : Promise<boolean> {
+    public requestPostDeleteMessage(messageId : string) : boolean {
         this.expectedResponseToRequest.push(RequestType.MESSAGE_DELETE);
-        const r : Promise<boolean> = this.ch.send("PLACE-HOLDER");
-        return r;
+        return true;
     }
 }
 

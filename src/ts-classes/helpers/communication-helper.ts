@@ -36,10 +36,8 @@ export class CommunicationHelper {
      */
     public async connect() : Promise<boolean> {
         try {
-            this.ws = await WebSocket.connect(this.connectionAddress).then((r) => {
-                return r;
-              })
-            this.connected = true
+            this.ws = await WebSocket.connect(this.connectionAddress).then((r) => { return r; });
+            this.connected = true;
             return true;
         } catch (err : unknown) {
             this.lastErr = err;
@@ -137,7 +135,7 @@ export class CommunicationHelper {
       * return true on success, else false.
      */
     public addInfListener(listener: (arg: Message) => void) : boolean {
-        const listnerKiller = this.addListener(listener);
+        const listnerKiller : (() => void) | boolean = this.addListener(listener);
         if((typeof listnerKiller === "boolean")) {
             // if listnerKiller is false. listnerKiller can't be true.
             return false;
@@ -155,7 +153,7 @@ export class CommunicationHelper {
       * return true on success, else false.
      */
      public addSingleUseListener(listener: (arg: Message) => boolean) : boolean {
-        const listnerKiller = this.addListener((arg: Message) =>{
+        const listnerKiller : (() => void) | boolean = this.addListener((arg: Message) =>{
             if(listener(arg)) { // listener return true, if finished it's job and need to be killed
                 if(typeof listnerKiller !== "boolean") {
                     listnerKiller();
