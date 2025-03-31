@@ -1,4 +1,4 @@
-import WebSocket, { Message } from '@tauri-apps/plugin-websocket';
+import WebSocket, { Message, CloseFrame } from '@tauri-apps/plugin-websocket';
 // when using `"withGlobalTauri": true`, you may use
 // const WebSocket = window.__TAURI__.websocket;
 
@@ -15,12 +15,24 @@ export class communicationHelper {
         return ((this.ws != undefined) && this.isConnected)
     }
 
+
     constructor() {
         this.connect().catch((error) => {
             this.lastErr = error;
           });
     }
 
+
+    /**
+     * Connect the websocket
+     * 
+     * In cases fail to connect during constructor().
+     * Then can retry to connect, without the need reconstruct the object.
+     * 
+     * Or reconnect after disconnecting.
+     * 
+     * Return True on success, else false
+     */
     public async connect() : Promise<boolean> {
         try {
             this.ws = await WebSocket.connect(this.connectionAddress).then((r) => {
@@ -35,6 +47,11 @@ export class communicationHelper {
         return false;
     }
 
+    /**
+     * Disconnect from the websocket
+     * 
+     * Return True on success, else false
+     */
     public async disconnect() : Promise<boolean> {
         try {
             if(this.ws != undefined) {
@@ -48,7 +65,30 @@ export class communicationHelper {
         return false;
     }
 
-    public async send(message : string) : Promise<boolean> {
+    /**
+     * Send a message over the websocket
+     * 
+     * Return True on success, else false
+     * 
+     * interface MessageKind<T, D> {
+     * type: T;
+     * data: D;
+     * }
+     * 
+     * interface CloseFrame {
+     * code: number;
+     * reason: string;
+     * }
+     * 
+     * type Message =
+     * 
+     * MessageKind<'Text', string> |
+     * MessageKind<'Binary', number[]> |
+     * MessageKind<'Ping', number[]> |
+     * MessageKind<'Pong', number[]> |
+     * MessageKind<'Close', CloseFrame | null>;
+     */
+    protected async send(message: Message | string | number[]) : Promise<boolean> {
         try {
             if(this.ws != undefined) {
                 await this.ws.send(message).then(() => {});
@@ -60,10 +100,33 @@ export class communicationHelper {
         return false;
     }
 
-    public setListener(cb: (arg: Message) => void) : boolean {
+    /**
+     * Set a listener function, which is called on getting a new message
+     * 
+     * Return True on success, else false
+     * 
+     * interface MessageKind<T, D> {
+     * type: T;
+     * data: D;
+     * }
+     * 
+     * interface CloseFrame {
+     * code: number;
+     * reason: string;
+     * }
+     * 
+     * type Message =
+     * 
+     * MessageKind<'Text', string> |
+     * MessageKind<'Binary', number[]> |
+     * MessageKind<'Ping', number[]> |
+     * MessageKind<'Pong', number[]> |
+     * MessageKind<'Close', CloseFrame | null>;
+     */
+    protected setListener(listener: (arg: Message) => void) : boolean {
         try {
             if(this.ws != undefined) {
-                this.ws.addListener(cb);
+                this.ws.addListener(listener);
                 return true;
             }
         } catch (error) {
