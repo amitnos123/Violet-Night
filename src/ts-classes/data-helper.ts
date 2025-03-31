@@ -36,8 +36,17 @@ export class dataHelper {
     }
 
 
+    /* Server Request Methods */
+    /*------------------------*/
+
+    /*------------------------*/
+    /** Data Request Methods **/
+    /*------------------------*/
+
     /**
      * requestFriends
+     * 
+     * Return True on success, else false
      */
     public requestFriends() : boolean {
         return true;
@@ -45,6 +54,8 @@ export class dataHelper {
 
     /**
      * requestPrivateChannels
+     * 
+     * Return True on success, else false
      */
     public requestPrivateChannels() : boolean {
         return true;
@@ -52,6 +63,8 @@ export class dataHelper {
 
     /**
      * requestGroupChannels
+     * 
+     * Return True on success, else false
      */
     public requestGroupChannels() : boolean {
         return true;
@@ -59,6 +72,8 @@ export class dataHelper {
 
     /**
      * requestUserGuilds
+     * 
+     * Return True on success, else false
      */
     public requestUserGuilds() : boolean {
         return true;
@@ -66,6 +81,8 @@ export class dataHelper {
 
     /**
      * requestGuildUsers
+     * 
+     * Return True on success, else false
      */
     public requestGuildUsers() : boolean {
         return true;
@@ -73,6 +90,8 @@ export class dataHelper {
 
     /**
      * requestGuildChannels
+     * 
+     * Return True on success, else false
      */
     public requestGuildChannels(guildId : string) : boolean {
         return true;
@@ -80,9 +99,42 @@ export class dataHelper {
 
     /**
      * requestChannelMessages
+     * 
+     * Return True on success, else false
      */
     public requestChannelMessages(channelId : string) : boolean {
         return true;
+    }
+
+    /*--------------------------*/
+    /** Update Request Methods **/
+    /*--------------------------*/
+
+    /**
+     * requestNewMessage
+     * 
+     * Return True on success, else false
+     */
+    public requestPostNewMessage(message : MessageObject) : boolean {
+        return true;
+    }
+
+    /**
+     * requestPostUpdateMessage
+     * 
+     * Return True on success, else false
+     */
+    public requestPostUpdateMessage(messageId : string, newMessageContent : string) {
+        
+    }
+
+    /**
+     * requestPostDeleteMessage
+     * 
+     * Return True on success, else false
+     */
+    public requestPostDeleteMessage(messageId : string) {
+        
     }
 }
 
