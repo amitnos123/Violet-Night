@@ -25,7 +25,7 @@ export class DataHelper {
         It get the data and return the requested data as needed
     */
 
-    // Client user's Id
+    // Client user's Id. Getting it when logging in
     private userId : string = '';
 
     private readonly ch! : CommunicationHelper;
